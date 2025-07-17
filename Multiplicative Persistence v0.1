@@ -1,0 +1,72 @@
+def list_to_minimum(prime_list: list[int]):
+    minimum = 0
+    while prime_list.count(3) >= 2:
+        prime_list.append(9)
+        prime_list.remove(3)
+        prime_list.remove(3)
+    while prime_list.count(2) >= 3:
+        prime_list.append(8)
+        prime_list.remove(2)
+        prime_list.remove(2)
+        prime_list.remove(2)
+    while prime_list.count(2)*prime_list.count(3) == 1:
+        prime_list.append(6)
+        prime_list.remove(2)
+        prime_list.remove(3)
+    prime_list.sort()
+    print(prime_list)
+    for i in prime_list:
+        minimum = (minimum + i)*10
+    return minimum//10
+
+def quick_prime_factorization(n: int):
+    prime_list = []
+    while n%2 == 0:
+        prime_list.append(2)
+        n = n//2
+    while n%3 == 0:
+        prime_list.append(3)
+        n = n//3
+    while n%5 == 0:
+        prime_list.append(5)
+        n = n//5
+    while n%7 == 0:
+        prime_list.append(7)
+        n = n//7
+    if n != 1:
+        print("Error")
+    return(prime_list)
+
+def find_by_persistence(target: int) -> int:
+    count = 1
+    while multiplicative_persistence(count) != target:
+            if '0' in str(count):
+                count += 1
+            print(count)
+            count += 1
+    return count
+
+def multiplicative_persistence(n: int) -> int:
+    count = 0
+    while len(str(n)) > 1:
+        init = 1
+        for i in str(n):
+            init *= int(i)
+        n = init
+        count +=1
+        print(n)
+    return count
+
+def show_minimal_multi():
+    print(multiplicative_persistence(39))
+    print(multiplicative_persistence(77))
+    print(multiplicative_persistence(679))
+    print(multiplicative_persistence(6788))
+    print(multiplicative_persistence(68889))
+    print(multiplicative_persistence(2677889))
+    print(multiplicative_persistence(26888999))
+    print(multiplicative_persistence(3778888999))
+    print(multiplicative_persistence(277777788888899))
+
+print(list_to_minimum(quick_prime_factorization(438939648)))
+
